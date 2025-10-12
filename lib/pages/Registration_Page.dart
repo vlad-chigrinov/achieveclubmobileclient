@@ -4,7 +4,6 @@ import '../main.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../items/Four_Digit_Code_Input.dart';
 
@@ -134,12 +133,12 @@ class _RegisterPageState extends State<RegisterPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  AppLocalizations.of(context)!.confirmEmail,
+                  'Подтверждение адреса электронной почты',
                   textAlign: TextAlign.center,
                   textScaler: TextScaler.linear(1.2),
                 ),
                 Text(
-                  '${AppLocalizations.of(context)!.codeSended} - \n$email',
+                  'Вы получили код по электронной почте - \n$email',
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16.0),
@@ -154,7 +153,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     widget.registerCallback();
                   }
                       : null,
-                  child: Text(AppLocalizations.of(context)!.send),
+                  child: Text('Отправить'),
                 ),
               ],
             ),
@@ -257,7 +256,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Navigator.pop(dialogContext);
                   },
                   child: Center(
-                      child: Text(AppLocalizations.of(context)!.close)),
+                      child: Text('Закрыть')),
                 )
               ],
             ),
@@ -284,18 +283,16 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 isCodeSended
                     ? Text(
-                  '${AppLocalizations.of(context)!.error}\n${AppLocalizations
-                      .of(context)!.codeSendedAfter}',
+                  'Ошибка\nКод уже отправлен, если вы не получили код - попробуйте через 5 минут.',
                   textAlign: TextAlign.center,
                 )
                     : isValidate != false
                     ? Text(
-                  AppLocalizations.of(context)!.emailConfirmed,
+                  'Почта подтверждена.',
                   textAlign: TextAlign.center,
                 )
                     : Text(
-                    '${AppLocalizations.of(context)!.error}!\n${AppLocalizations
-                        .of(context)!.wrongCode}',
+                    'Ошибка!\nВведен неправильный код или',
                     textAlign: TextAlign.center),
                 const SizedBox(
                   height: 16.0,
@@ -316,8 +313,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             showProofCodeDialog(context, widget.email);
                           },
                           child: Center(
-                              child: Text(
-                                  AppLocalizations.of(context)!.writeCode)),
+                              child: Text('Ввести код')),
                         ),
                         const SizedBox(width: 8.0,),
                         ElevatedButton(
@@ -325,8 +321,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             Navigator.pop(dialogContext);
                           },
                           child: Center(
-                              child: Text(
-                                  AppLocalizations.of(context)!.close)),
+                              child: Text('Закрыть')),
                         )
                       ],
                     )
@@ -337,8 +332,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         showProofCodeDialog(context, widget.email);
                       },
                       child: Center(
-                          child: Text(
-                              AppLocalizations.of(context)!.repeat)),
+                          child: Text('Повторить')),
                     )
                         : ElevatedButton(
                       onPressed: () {
@@ -349,8 +343,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         }
                       },
                       child: Center(
-                          child: Text(AppLocalizations.of(context)!
-                              .continued)),
+                          child: Text('Продолжить')),
                     ),
                   ],
                 ),
@@ -366,7 +359,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.registration),
+        title: Text('Регистрация'),
         centerTitle: true,
       ),
       body: Padding(
@@ -389,9 +382,9 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.name,
+                    labelText: 'Имя',
                     errorText: widget.firstName.isNotEmpty && widget.firstName.length < 2
-                        ? AppLocalizations.of(context)!.nameError
+                        ? 'Имя должно содержать минимум 2 буквы'
                         : null,
                     errorStyle: const TextStyle(color: Color(0xFFD7181D)),
                     focusedErrorBorder: OutlineInputBorder(
@@ -426,19 +419,19 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return AppLocalizations.of(context)!.emptyName;
+                      return 'Имя должно быть заполнено';
                     }
                     if (value!.length < 2) {
-                      return AppLocalizations.of(context)!.nameError;
+                      return 'Имя должно содержать минимум 2 буквы';
                     }
                     return null;
                   },
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.surname,
+                    labelText: 'Фамилия',
                     errorText: widget.lastName.isNotEmpty && widget.lastName.length < 5
-                        ? AppLocalizations.of(context)!.surnameError
+                        ? 'Фамилия должна содержать минимум 5 буквы'
                         : null,
                     errorStyle: const TextStyle(color: Color(0xFFD7181D)),
                     focusedErrorBorder: OutlineInputBorder(
@@ -473,10 +466,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return AppLocalizations.of(context)!.emptySurname;
+                      return 'Фамилия должна быть заполнена';
                     }
                     if (value!.length <= 4) {
-                      return AppLocalizations.of(context)!.surnameError;
+                      return 'Фамилия должна содержать минимум 5 буквы';
                     }
                     return null;
                   },
@@ -485,7 +478,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   decoration: InputDecoration(
                     labelText: 'E-mail',
                     errorText: widget.email.isNotEmpty && !EmailValidator.validate(widget.email)
-                        ? AppLocalizations.of(context)!.emailError
+                        ? 'Указаная почта не валидна'
                         : null,
                     errorStyle: const TextStyle(color: Color(0xFFD7181D)),
                     focusedErrorBorder: OutlineInputBorder(
@@ -521,20 +514,20 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return AppLocalizations.of(context)!.emptyEmail;
+                      return 'Почта должна быть указана';
                     }
                     if (!EmailValidator.validate(value!)) {
-                      return AppLocalizations.of(context)!.emailError;
+                      return 'Указаная почта не валидна';
                     }
                     return null;
                   },
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.password,
+                    labelText: 'Пароль',
                     errorText: widget.password.isNotEmpty &&
                         (widget.password.length < 6 || !_isPasswordValid(widget.password))
-                        ? AppLocalizations.of(context)!.passwordError
+                        ? 'Пароль должен содержать не менее 6 символов и не менее 1 буквы или 1 цифры.'
                         : null,
                     errorStyle: const TextStyle(color: Color(0xFFD7181D)),
                     errorMaxLines: 2,
@@ -574,10 +567,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return AppLocalizations.of(context)!.emptyPassword;
+                      return 'Пароль обязателен для заполнения';
                     }
                     if (value!.length < 6 || !_isPasswordValid(value)) {
-                      return AppLocalizations.of(context)!.passwordError;
+                      return 'Пароль должен содержать не менее 6 символов и не менее 1 буквы или 1 цифры.';
                     }
                     return null;
                   },
@@ -585,9 +578,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 TextFormField(
                   controller: confirmPasswordController,
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.confirmPassword,
+                    labelText: 'Подтверждение пароля',
                     errorText: confirmPasswordController.text != passwordController.text
-                        ? AppLocalizations.of(context)!.confirmPasswordError
+                        ? 'Пароли не совпадают'
                         : null,
                     errorStyle: const TextStyle(color: Color(0xFFD7181D)),
                     focusedErrorBorder: OutlineInputBorder(
@@ -623,10 +616,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return AppLocalizations.of(context)!.emptyConfirmPassword;
+                      return 'Подтверждение пароля обязательно';
                     }
                     if (value != passwordController.text) {
-                      return AppLocalizations.of(context)!.confirmPasswordError;
+                      return 'Пароли не совпадают';
                     }
                     return null;
                   },
@@ -646,7 +639,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                AppLocalizations.of(context)!.registrate,
+                'Зарегистрируйтесь',
                 style: TextStyle(fontSize: 18),
               ),
             ),

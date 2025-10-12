@@ -7,9 +7,6 @@ import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-
 
 class AuthenticationPage extends StatefulWidget {
   const AuthenticationPage({super.key});
@@ -152,8 +149,8 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text(AppLocalizations.of(context)!.error),
-              content: Text(AppLocalizations.of(context)!.emailPassError),
+              title: Text('Ошибка'),
+              content: Text('Почта или пароль указаны не верно.'),
               actions: [
                 TextButton(
                   child: const Text('ОК'),
@@ -174,8 +171,8 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text(AppLocalizations.of(context)!.error),
-              content: Text('${AppLocalizations.of(context)!.loginError}:\n$emailError\n$passError'),
+              title: Text('Ошибка'),
+              content: Text('Не удалось войти!\n$emailError\n$passError'),
               actions: [
                 TextButton(
                   child: const Text('ОК'),
@@ -234,8 +231,8 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(AppLocalizations.of(context)!.error),
-            content: Text(AppLocalizations.of(context)!.emptyFields),
+            title: Text('Ошибка'),
+            content: Text('Все поля должны быть заполнены'),
             actions: [
               TextButton(
                 child: const Text('ОК'),

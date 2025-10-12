@@ -6,7 +6,6 @@ import '../main.dart';
 import '../pages/Registration_Page.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginPage extends StatefulWidget {
   final Function() loginCallback;
@@ -163,13 +162,13 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text (AppLocalizations.of(context)!.confirmEmail, textAlign: TextAlign.center, textScaler: TextScaler.linear(1.2)),
+                Text ('Подтверждение адреса электронной почты', textAlign: TextAlign.center, textScaler: TextScaler.linear(1.2)),
                 TextFormField(
                   controller: _forgotEmailController,
                   decoration: InputDecoration(
                     labelText: 'E-mail',
                     errorText: widget.email.isNotEmpty && !EmailValidator.validate(widget.email)
-                        ? AppLocalizations.of(context)!.emailError
+                        ? 'Указаная почта не валидна'
                         : null,
                   ),
                   keyboardType: TextInputType.emailAddress,
@@ -183,10 +182,10 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return AppLocalizations.of(context)!.emptyEmail;
+                      return 'Почта должна быть указана';
                     }
                     if (!EmailValidator.validate(value!)) {
-                      return AppLocalizations.of(context)!.emailError;
+                      return 'Указаная почта не валидна';
                     }
                     return null;
                   },
@@ -198,7 +197,7 @@ class _LoginPageState extends State<LoginPage> {
                     debugPrint("\n\n\n\n${widget.email}\n\n\n\n");
                     sendProofCode(email);
                   },
-                  child: Text(AppLocalizations.of(context)!.send),
+                  child: Text('Отправить'),
                 ),
               ],
             ),
@@ -254,8 +253,8 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text (AppLocalizations.of(context)!.confirmEmail, textAlign: TextAlign.center, textScaler: TextScaler.linear(1.2),),
-                Text ('${AppLocalizations.of(context)!.codeSended} - \n$email', textAlign: TextAlign.center,),
+                Text ('Подтверждение адреса электронной почты', textAlign: TextAlign.center, textScaler: TextScaler.linear(1.2),),
+                Text ('Вы получили код по электронной почте - \n$email', textAlign: TextAlign.center,),
                 const SizedBox(height: 16.0),
                 FourDigitCodeInput(updateProofCode: _updateProofCode),
                 const SizedBox(height: 16.0,),
@@ -264,7 +263,7 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.of(dialogContext).pop();
                     navigateToPasswordPage();
                   } : null,
-                  child: Text(AppLocalizations.of(context)!.send),
+                  child: Text('Отправить'),
                 ),
               ],
             ),
@@ -291,16 +290,16 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 isCodeSended
                     ? Text(
-                  '${AppLocalizations.of(context)!.error}\n${AppLocalizations.of(context)!.codeSendedAfter}',
+                  'Ошибка\nКод уже отправлен, если вы не получили код - попробуйте через 5 минут.',
                   textAlign: TextAlign.center,
                 )
                     : isValidate != false
                     ? Text(
-                  AppLocalizations.of(context)!.emailConfirmed,
+                  'Почта подтверждена.',
                   textAlign: TextAlign.center,
                 )
                     : Text(
-                    '${AppLocalizations.of(context)!.error}!\n${AppLocalizations.of(context)!.wrongCode}',
+                    'Ошибка!\nВведен неправильный код или',
                     textAlign: TextAlign.center),
                 const SizedBox(
                   height: 16.0,
@@ -322,7 +321,7 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           child: Center(
                               child: Text(
-                                  AppLocalizations.of(context)!.writeCode)),
+                                  'Ввести код')),
                         ),
                         const SizedBox(width: 8.0,),
                         ElevatedButton(
@@ -331,7 +330,7 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           child: Center(
                               child: Text(
-                                  AppLocalizations.of(context)!.close)),
+                                  'Закрыть')),
                         )
                       ],
                     )
@@ -343,7 +342,7 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       child: Center(
                           child: Text(
-                              AppLocalizations.of(context)!.repeat)),
+                             'Повторить')),
                     )
                         : ElevatedButton(
                       onPressed: () {
@@ -354,8 +353,7 @@ class _LoginPageState extends State<LoginPage> {
                         }
                       },
                       child: Center(
-                          child: Text(AppLocalizations.of(context)!
-                              .continued)),
+                          child: Text('Продолжить')),
                     ),
                   ],
                 ),
@@ -371,7 +369,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.authorization),
+        title: Text('Авторизация'),
         centerTitle: true,
       ),
       body: Padding(
@@ -395,7 +393,7 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       labelText: 'E-mail',
                       errorText: widget.email.isNotEmpty && !EmailValidator.validate(widget.email)
-                          ? AppLocalizations.of(context)!.emailError
+                          ? 'Указаная почта не валидна'
                           : null,
                       errorStyle: const TextStyle(color: Color(0xFFD7181D)),
                       focusedErrorBorder: OutlineInputBorder(
@@ -427,10 +425,10 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     validator: (value) {
                       if (value?.isEmpty ?? true) {
-                        return AppLocalizations.of(context)!.emptyEmail;
+                        return 'Почта должна быть указана';
                       }
                       if (!EmailValidator.validate(value!)) {
-                        return AppLocalizations.of(context)!.emailError;
+                        return 'Указаная почта не валидна';
                       }
                       return null;
                     },
@@ -439,7 +437,7 @@ class _LoginPageState extends State<LoginPage> {
                   TextFormField(
                     controller: _passwordController,
                     decoration: InputDecoration(
-                      labelText: AppLocalizations.of(context)!.password,
+                      labelText: 'Пароль',
                       suffixIcon: IconButton(
                         icon: Icon(passIcon),
                         onPressed: () {
@@ -449,7 +447,7 @@ class _LoginPageState extends State<LoginPage> {
                         },
                       ),
                       errorText: widget.password.isNotEmpty && (widget.password.length < 6 || !_isPasswordValid(widget.password))
-                          ? AppLocalizations.of(context)!.passwordError
+                          ? 'Пароль должен содержать не менее 6 символов и не менее 1 буквы или 1 цифры.'
                           : null,
                       errorStyle: const TextStyle(color: Color(0xFFD7181D)),
                       errorMaxLines: 2,
@@ -483,10 +481,10 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     validator: (value) {
                       if (value?.isEmpty ?? true) {
-                        return AppLocalizations.of(context)!.emptyPassword;
+                        return 'Пароль обязателен для заполнения';
                       }
                       if (value!.length < 6 || !_isPasswordValid(value)) {
-                        return AppLocalizations.of(context)!.passwordError;
+                        return 'Пароль должен содержать не менее 6 символов и не менее 1 буквы или 1 цифры.';
                       }
                       return null;
                     },
@@ -499,7 +497,7 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () {
                 showChangePassword(context);
               },
-              child: Text(AppLocalizations.of(context)!.forgotPassword, textAlign: TextAlign.center),
+              child: Text('Забыли пароль?', textAlign: TextAlign.center),
             ),
             const SizedBox(height: 24.0),
             ElevatedButton(
@@ -513,7 +511,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Text(
-                  AppLocalizations.of(context)!.login,
+                  'Войти',
                   style: TextStyle(fontSize: 18),
                 ),
               ),
@@ -523,7 +521,7 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () {
                 navigateToRegisterPage(context);
               },
-              child: Text(AppLocalizations.of(context)!.registrate, textAlign: TextAlign.center),
+              child: Text('Зарегистрируйтесь', textAlign: TextAlign.center),
             ),
             const SizedBox(height: 16.0,),
             //LanguageSelectionButton(updateAchievements: () => (),),

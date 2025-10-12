@@ -30,11 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
-  intl: any
   shared_preferences: ^2.0.8
-  flutter_hooks: ^0.20.5
+  flutter_hooks: ^0.21.3+1
   qr_flutter:
     git:
       url: https://github.com/theyakka/qr.flutter.git
@@ -44,7 +41,6 @@ dependencies:
   dio: ^5.4.3+1
   email_validator: ^3.0.0
   cached_network_image: any
-  provider: ^6.1.2
   backdoor_flutter: any
 
 dev_dependencies:

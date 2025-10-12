@@ -11,7 +11,6 @@ import '../data/User.dart';
 import '../items/Four_Digit_Code_Input.dart';
 import '../main.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'Home_Page.dart';
 
@@ -84,7 +83,7 @@ class _SettingsPageState extends State<SettingsPage> {
     } else if (response.statusCode == 401) {
       return fetchUser();
     } else {
-      throw Exception(AppLocalizations.of(context)!.fetchUserError);
+      throw Exception('Ошибка при загрузке информации пользователя');
     }
   }
 
@@ -389,11 +388,11 @@ class _SettingsPageState extends State<SettingsPage> {
           });
         } else {
           throw Exception(
-              '${AppLocalizations.of(context)!.uploadAvatarError}. Code: ${response.statusCode} \n ${response.headers} \n ${response.body}');
+              'Ошибка при загрузке аватара. Code: ${response.statusCode} \n ${response.headers} \n ${response.body}');
         }
       } catch (error) {
         throw Exception(
-            '${AppLocalizations.of(context)!.uploadAvatarError}: $error');
+            'Ошибка при загрузке аватара: $error');
       }
     }
   }
@@ -413,12 +412,12 @@ class _SettingsPageState extends State<SettingsPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  AppLocalizations.of(context)!.confirmEmail,
+                  'Подтверждение адреса электронной почты',
                   textAlign: TextAlign.center,
                   textScaler: TextScaler.linear(1.2),
                 ),
                 Text(
-                  '${AppLocalizations.of(context)!.codeSended} - \n$email',
+                  'Вы получили код по электронной почте - \n$email',
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16.0),
@@ -433,7 +432,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     changeEmail(email, proofCode);
                   }
                       : null,
-                  child: Text(AppLocalizations.of(context)!.send),
+                  child: Text('Отправить'),
                 ),
               ],
             ),
@@ -504,7 +503,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     Navigator.pop(dialogContext);
                   },
                   child: Center(
-                      child: Text(AppLocalizations.of(context)!.close)),
+                      child: Text('Закрыть')),
                 )
               ],
             ),
@@ -531,18 +530,16 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 isCodeSended
                     ? Text(
-                  '${AppLocalizations.of(context)!.error}\n${AppLocalizations
-                      .of(context)!.codeSendedAfter}',
+                  'Ошибка\nКод уже отправлен, если вы не получили код - попробуйте через 5 минут.',
                   textAlign: TextAlign.center,
                 )
                     : isValidate != false
                     ? Text(
-                  AppLocalizations.of(context)!.emailConfirmed,
+                  'Почта подтверждена.',
                   textAlign: TextAlign.center,
                 )
                     : Text(
-                    '${AppLocalizations.of(context)!.error}!\n${AppLocalizations
-                        .of(context)!.wrongCode}',
+                    'Ошибка!\nВведен неправильный код или',
                     textAlign: TextAlign.center),
                 const SizedBox(
                   height: 16.0,
@@ -563,8 +560,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             showProofCodeDialog(context, email);
                           },
                           child: Center(
-                              child: Text(
-                                  AppLocalizations.of(context)!.writeCode)),
+                              child: Text('Ввести код')),
                         ),
                         const SizedBox(width: 8.0,),
                         ElevatedButton(
@@ -572,8 +568,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             Navigator.pop(dialogContext);
                           },
                           child: Center(
-                              child: Text(
-                                  AppLocalizations.of(context)!.close)),
+                              child: Text('Закрыть')),
                         )
                       ],
                     )
@@ -584,8 +579,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         showProofCodeDialog(context, email);
                       },
                       child: Center(
-                          child: Text(
-                              AppLocalizations.of(context)!.repeat)),
+                          child: Text('Повторить')),
                     )
                         : ElevatedButton(
                       onPressed: () {
@@ -596,8 +590,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         }
                       },
                       child: Center(
-                          child: Text(AppLocalizations.of(context)!
-                              .continued)),
+                          child: Text('Продолжить')),
                     ),
                   ],
                 ),
@@ -1127,7 +1120,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                         decoration: InputDecoration(
                                           hintText: '${user.email}',
                                           errorText: emailController.text.isNotEmpty && !EmailValidator.validate(emailController.text)
-                                              ? AppLocalizations.of(context)!.emailError
+                                              ? 'Указаная почта не валидна'
                                               : null,
                                           errorStyle: const TextStyle(color: Color(0xFFD7181D)),
                                           hintStyle: TextStyle(
@@ -1165,10 +1158,10 @@ class _SettingsPageState extends State<SettingsPage> {
                                         textDirection: TextDirection.ltr,
                                         validator: (value) {
                                           if (value?.isEmpty ?? true) {
-                                            return AppLocalizations.of(context)!.emptyEmail;
+                                            return 'Почта должна быть указана';
                                           }
                                           if (!EmailValidator.validate(value!)) {
-                                            return AppLocalizations.of(context)!.emailError;
+                                            return 'Указаная почта не валидна';
                                           }
                                           return null;
                                         },

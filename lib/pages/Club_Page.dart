@@ -1,7 +1,6 @@
 import '../main.dart';
 import '../pages/User_Page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -52,7 +51,7 @@ class _ClubPageState extends State<ClubPage> {
       debugPrint('fetch user List $userList');
     } else {
 
-      throw Exception('${AppLocalizations.of(context)!.fetchClubsError}: ${clubResponse.body} [${clubResponse.statusCode}]');
+      throw Exception('Ошибка при загрузке клубов: ${clubResponse.body} [${clubResponse.statusCode}]');
     }
   }
 
@@ -111,7 +110,7 @@ class _ClubPageState extends State<ClubPage> {
       appBar: AppBar(
         title: Center(
           child: Text(
-            '${AppLocalizations.of(context)!.club} "${clubData?['title']}"',
+            'Клуб "${clubData?['title']}"',
             textAlign: TextAlign.center,
           ),
         ),
@@ -164,7 +163,7 @@ class _ClubPageState extends State<ClubPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.clubHistory,
+                      'История клуба',
                       style: TextStyle(fontSize: 18),
                     ),
                     Text(
@@ -178,7 +177,7 @@ class _ClubPageState extends State<ClubPage> {
               ),
               const SizedBox(height: 16),
               Text(
-                userList != [] ? '${AppLocalizations.of(context)!.clubStudents}:' : '',
+                userList != [] ? 'Студенты клуба:' : '',
                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               userList != null
@@ -199,7 +198,7 @@ class _ClubPageState extends State<ClubPage> {
                       backgroundImage: NetworkImage('$baseURL/${user['avatar']}'),
                     ),
                     title: Text('${user['firstName']} ${user['lastName']}'),
-                    subtitle: Text('${AppLocalizations.of(context)!.avgXP}: ${user['xpSum']}'),
+                    subtitle: Text('Количество опыта}: ${user['xpSum']}'),
                   );
                 },
               )

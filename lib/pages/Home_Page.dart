@@ -14,7 +14,6 @@ import '../tabItems/Shop_Tab.dart';
 import '../tabItems/About_Tab.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   final Function() logoutCallback;
@@ -71,7 +70,7 @@ class _HomePageState extends State<HomePage> {
     } else if (response.statusCode == 401) {
       return fetchUser();
     } else {
-      throw Exception(AppLocalizations.of(context)!.fetchUserError);
+      throw Exception('Ошибка при загрузке информации пользователя');
     }
   }
 

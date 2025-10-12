@@ -1,4 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class ChangePassPage extends StatefulWidget {
@@ -61,7 +60,7 @@ class _ChangePassPageState extends State<ChangePassPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              AppLocalizations.of(context)!.writeNewPassword,
+              'Введите новый пароль',
               textAlign: TextAlign.center,
               textScaler: TextScaler.linear(1.2),
             ),
@@ -73,7 +72,7 @@ class _ChangePassPageState extends State<ChangePassPage> {
                   TextFormField(
                     controller: _forgotPasswordController,
                     decoration: InputDecoration(
-                      labelText: AppLocalizations.of(context)!.password,
+                      labelText: 'Пароль',
                       suffixIcon: IconButton(
                         icon: Icon(passIcon),
                         onPressed: () {
@@ -82,7 +81,7 @@ class _ChangePassPageState extends State<ChangePassPage> {
                       ),
                       errorText: password.isNotEmpty &&
                           (password.length < 6 || !_isPasswordValid(password))
-                          ? AppLocalizations.of(context)!.passwordError
+                          ? 'Пароль должен содержать не менее 6 символов и не менее 1 буквы или 1 цифры.'
                           : null,
                       errorMaxLines: 2,
                     ),
@@ -98,10 +97,10 @@ class _ChangePassPageState extends State<ChangePassPage> {
                     },
                     validator: (value) {
                       if (value?.isEmpty ?? true) {
-                        return AppLocalizations.of(context)!.emptyPassword;
+                        return 'Пароль обязателен для заполнения';
                       }
                       if (value!.length < 6 || !_isPasswordValid(value)) {
-                        return AppLocalizations.of(context)!.passwordError;
+                        return 'Пароль должен содержать не менее 6 символов и не менее 1 буквы или 1 цифры.';
                       }
                       return null;
                     },
@@ -116,7 +115,7 @@ class _ChangePassPageState extends State<ChangePassPage> {
                       widget.changePassword();
                     }
                         : null,
-                    child: Text(AppLocalizations.of(context)!.send),
+                    child: Text('Отправить'),
                   ),
                 ],
               ),

@@ -1,5 +1,4 @@
 import '../data/Club.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -49,7 +48,7 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
         widget.clubId = clubs.isNotEmpty ? clubs[0].id : 0;
       });
     } else {
-      throw Exception(AppLocalizations.of(context)!.fetchClubsError);
+      throw Exception('Ошибка при загрузке клубов');
     }
   }
 
@@ -57,7 +56,7 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.selectClub),
+        title: Text('Выберите клуб'),
       ),
       body: Column(
         children: [
@@ -78,7 +77,7 @@ class _ClubSelectionPageState extends State<ClubSelectionPage> {
             },
           ),
           const SizedBox(height: 16),
-          Text('${AppLocalizations.of(context)!.clubId}: ${widget.clubId}'),
+          Text('Выбранный клуб: ${widget.clubId}'),
         ],
       ),
     );

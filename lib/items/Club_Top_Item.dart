@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../main.dart';
 
@@ -50,8 +49,8 @@ class ClubTopItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${AppLocalizations.of(context)!.club} "$clubName"', textScaler: const TextScaler.linear(1.3)),
-                  Text('${AppLocalizations.of(context)!.avgXP}: $xp XP', textScaler: const TextScaler.linear(1.3)),
+                  Text('Клуб "$clubName"', textScaler: const TextScaler.linear(1.3)),
+                  Text('Количество опыта: $xp XP', textScaler: const TextScaler.linear(1.3)),
                 ],
               ),
             ],
